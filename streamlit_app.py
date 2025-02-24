@@ -10,7 +10,7 @@ import uuid
 from datetime import datetime
 from constants import CONSENT_FORM, brands_list
 # Constants and Configuration
-QUESTIONS_PER_MODEL_PAIR = 3
+QUESTIONS_PER_MODEL_PAIR = 20
 TOTAL_QUESTIONS = QUESTIONS_PER_MODEL_PAIR * 3  # 60 total questions
 MODEL_PAIRS = [('model_a', 'model_b'), ('model_b', 'model_c'), ('model_a', 'model_c')]
 IMAGE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "./data/media/")
