@@ -222,7 +222,7 @@ def _check_intro_questions_complete():
     
     # Define required fields and their minimum requirements
     required_fields = {
-        "brand_recognition": lambda x: len(x) > 0,  # At least one brand selected
+        "brand_recognition": lambda x: len(x) >= 5,  # At least five brands selected
         "social_platforms": lambda x: len(x) > 0,  # At least one platform selected
         "social_engagement": lambda x: x is not None,  # Must select one option
         "shopping_frequency": lambda x: x is not None,  # Must select one option
