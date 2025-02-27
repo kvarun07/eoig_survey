@@ -14,6 +14,7 @@ QUESTIONS_PER_MODEL_PAIR = 20
 TOTAL_QUESTIONS = QUESTIONS_PER_MODEL_PAIR * 3  # 60 total questions
 MODEL_PAIRS = [('model_a', 'model_b'), ('model_b', 'model_c'), ('model_a', 'model_c')]
 IMAGE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "./data/media/")
+METADATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "./data/reward/")
 
 ### GOOGLE SHEETS CONNECTION
 # st.title("Read Google Sheet as DataFrame")
@@ -36,6 +37,16 @@ def is_valid_image_pair(image1_path, image2_path):
 
 def get_image_pairs():
     """Generate random image pairs for the survey with error handling."""
+    # Load company metadata
+    company_data = {}
+    metadata_file = os.path.join(METADATA_DIR, "model_a_sampled_with_company.jsonl")
+    with open(metadata_file, 'r') as f:
+        for line in f:
+            data = json.loads(line)
+            # Assuming image field contains the full filename, extract just the ID
+            image_id = data['image'].split('.')[0]
+            company_data[image_id] = str(data['company']).upper()
+    
     # Get list of all image IDs (filenames without extension)
     image_ids = [f.split('.')[0] for f in os.listdir(os.path.join(IMAGE_DIR, "model_a"))]
     
@@ -64,7 +75,8 @@ def get_image_pairs():
                     'model1': model1,
                     'model2': model2,
                     'image1_path': image1_path,
-                    'image2_path': image2_path
+                    'image2_path': image2_path,
+                    'company': company_data.get(image_id, "Unknown Company")  # Add company information
                 })
                 pair_count += 1
             # If invalid, the loop will continue with next sample
@@ -397,11 +409,12 @@ with pages:
         ).display()
     
     else:
-        # Existing image comparison questions start here
-        question_idx = pages.current - 3  # Update index calculation
+        # Image comparison questions
+        question_idx = pages.current - 3
         pair = st.session_state["image_pairs"][question_idx]
         
         st.write("### Part - B\n#### Select the more visually appealing image:")
+        st.write(f"**Company**: {pair['company']}")  # Display company name
         
         col1, col2 = st.columns(2)
         
