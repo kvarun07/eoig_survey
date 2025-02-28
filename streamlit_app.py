@@ -443,6 +443,7 @@ with pages:
             margin-top: 10px;
             background-color: #f0f2f6;
             border: 1px solid #e0e0e0;
+            color: #262730;
         }
         .stButton button:hover {
             background-color: #e8e8e8;
