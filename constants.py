@@ -17,8 +17,8 @@ CONSENT_FORM = """
 **Confidentiality:** I understand the survey is anonymous. Only the responses to questions will be collected and stored. The data collected will be kept confidential, under the supervision and responsibility of PIs. Only aggregated statistics will be reported in a scientific paper as a result of this study. No personally identifiable information will be used in the publication/dissemination of the results.
 
 **Contact Details:** For further details about the research and how your responses will be used, please contact any of the following people:
-- Varun Khurana (varun19124@iiitd.ac.in)
-- Yaman Kumar (yamank@iiitd.ac.in)
+- [Varun Khurana](mailto:varun19124@iiitd.ac.in)
+- [Yaman Kumar](mailto:yamank@iiitd.ac.in)
 
 **Consent:** Please provide consent to proceed with the survey.
 """
