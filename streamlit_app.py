@@ -505,7 +505,11 @@ with pages:
         
         # Show current selection status
         if st.session_state[response_key]:
-            selected_label = "A" if st.session_state[response_key] == pair['model1'] else "B"
+            # Determine the correct label based on the selected model and current layout
+            if pair['show_first_on_left']:
+                selected_label = "A" if st.session_state[response_key] == pair['model1'] else "B"
+            else:
+                selected_label = "B" if st.session_state[response_key] == pair['model1'] else "A"
             st.success(f"You selected Image {selected_label}")
         else:
             st.info("Please select one of the images to continue")
